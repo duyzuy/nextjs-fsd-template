@@ -1,4 +1,6 @@
-import type { PropsWithChildren } from "react";
+"use client";
+import { type PropsWithChildren, useEffect, useState } from "react";
+import { Button } from "@/components/base/button";
 import { cn } from "@/lib/utils";
 
 export interface HeroSectionProps extends PropsWithChildren {
@@ -10,6 +12,25 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 	children,
 	className,
 }) => {
+	const [connectionStatus, setConnectionStatus] = useState("Connecting...");
+	const [messages, setMessages] = useState<string[]>([]);
+	useEffect(() => {
+		const eventsource = new EventSource("/api/sse");
+
+		eventsource.onopen = () => {
+			setConnectionStatus("connected");
+		};
+
+		eventsource.onmessage = (evt) => {
+			console.log(evt);
+			const data = JSON.parse(evt.data);
+			setMessages((prev) => [...prev, data.message]);
+		};
+
+		eventsource.onerror = (evt) => {
+			setConnectionStatus("Connection failed");
+		};
+	}, []);
 	return (
 		<div className={cn("container mx-auto px-4 md:px-6 lg:px-8", className)}>
 			<div className="video-wrapper rounded-4xl overflow-hidden aspect-video relative w-full">
@@ -24,6 +45,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 					<p className="text-6xl text-white font-bold">{headline}</p>
 				</div>
 				{children && <div className="child">{children}</div>}
+			</div>
+			{connectionStatus}
+			<div>
+				{messages.map((mess, i) => (
+					<div key={i}>{mess}</div>
+				))}
 			</div>
 		</div>
 	);

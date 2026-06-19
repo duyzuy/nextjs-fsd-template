@@ -2,8 +2,9 @@
 	"name": "nice-tour-fe",
 	"version": "0.1.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
-		"dev": "next dev",
+		"dev": "node server.js",
 		"prebuild": "pnpm run lint && pnpm run lint:boundaries",
 		"build": "next build",
 		"start": "next start",
