@@ -19,6 +19,7 @@ const MainHeader: React.FC<MainHeaderProps> = () => {
 	const MENUS = [
 		{ title: "About", href: "/about" },
 		{ title: "Destination", href: "/destination" },
+		{ title: "Gallery", href: "/gallery" },
 		{ title: "Service", href: "/service" },
 		{ title: "Contact", href: "/contact" },
 	];

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import type React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/base/dialog";
+import { Dialog, DialogContent } from "@/components/base/dialog";
 import { useAppStore } from "@/stores/app-store";
 import useSignin from "../hooks/useSignin";
 import {

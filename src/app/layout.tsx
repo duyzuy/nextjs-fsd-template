@@ -9,6 +9,8 @@ import MainFooter from "@/widgets/MainFooter";
 import MainHeader from "@/widgets/MainHeader";
 
 import "../themes/globals.css";
+import "../themes/transition.css";
+
 import { AppProviders } from "@/widgets/AppProviders";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
