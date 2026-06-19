@@ -1,0 +1,33 @@
+import type { TProfile, TSignIn, TSignUp } from "@/entities/auth/model/auth.type";
+import type { GetProfileDto, SignInDto, SignUpDto } from "./auth.dto";
+
+export const toSigninDomain = (dto: SignInDto): TSignIn => {
+	return {
+		accessToken: dto.accessToken,
+		refreshToken: dto.refreshToken,
+	};
+};
+
+export const toSignUpDomain = (dto: SignUpDto): TSignUp => {
+	return {
+		id: dto.id,
+		name: dto.name,
+		email: "",
+		username: "",
+	};
+};
+
+export const toProfileDomain = (dto: GetProfileDto): TProfile => {
+	return {
+		id: dto.id,
+		email: dto.email,
+		name: dto.name,
+		username: dto.username,
+		profile: dto.profile
+			? {
+					firstName: dto.profile.firstname,
+					lastName: dto.profile.lastname,
+				}
+			: null,
+	};
+};
