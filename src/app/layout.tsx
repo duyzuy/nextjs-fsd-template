@@ -49,9 +49,7 @@ export default async function RootLayout({
 			)}
 		>
 			<head>
-				<Script strategy="beforeInteractive" id="theme">
-					{themeInitScript}
-				</Script>
+				<script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
 			</head>
 			<body className="min-h-full flex flex-col">
 				<AppProviders>

@@ -7,22 +7,13 @@ export const themeInitScript = `
 
     const theme = (savedTheme && themeOptions.includes(savedTheme)) ? savedTheme : 'system';
 	
-    const systemTheme = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
       : 'light';
 
-    const resolvedTheme =
-      theme === 'system'
-        ? systemTheme
-        : theme;
-
+    const resolvedTheme = theme === 'system' ? systemTheme : theme;
 	
-    document.documentElement.classList.toggle(
-      'dark',
-      resolvedTheme === 'dark'
-    );
+    document.documentElement.classList.toggle('dark', resolvedTheme === 'dark');
   } catch {}
 })();
 `;
