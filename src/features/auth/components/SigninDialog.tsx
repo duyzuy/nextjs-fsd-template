@@ -1,8 +1,8 @@
 "use client";
 import { useRouter } from "next/navigation";
 import type React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/base/dialog";
-import { useAppStore } from "@/stores/app-store/AppStoreProvider";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/base/dialog";
+import { useAppStore } from "@/stores/app-store";
 import useSignin from "../hooks/useSignin";
 import {
 	selectActiveModal,
@@ -23,7 +23,7 @@ const SigninDialog: React.FC<SigninDialogProps> = () => {
 		open ? openDialog("signin") : closeDialog();
 	};
 
-	const handleOpenSignUpButton = () => {
+	const handleOpenSignupDialog = () => {
 		openDialog("signup");
 	};
 	const isShowModal = activeModal === "signin";
@@ -38,18 +38,12 @@ const SigninDialog: React.FC<SigninDialogProps> = () => {
 	return (
 		<Dialog defaultOpen={isShowModal} open={isShowModal} onOpenChange={handleOpenChange}>
 			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>Signin</DialogTitle>
-				</DialogHeader>
-				<SigninForm onSubmit={onSignIn} error={error} isLoading={isLoading} />
-				<div>
-					<p className="text-center">
-						{`${"if you don't have account yet?"}`}{" "}
-						<button type="button" onClick={handleOpenSignUpButton}>
-							SignUp
-						</button>
-					</p>
-				</div>
+				<SigninForm
+					onSubmit={onSignIn}
+					error={error}
+					isLoading={isLoading}
+					onClickSignup={handleOpenSignupDialog}
+				/>
 			</DialogContent>
 		</Dialog>
 	);

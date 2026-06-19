@@ -4,11 +4,11 @@ import Script from "next/script";
 import SigninDialog from "@/features/auth/components/SigninDialog";
 import SignupDialog from "@/features/auth/components/SignupDialog";
 import { cn } from "@/lib/utils";
-import { themeInitScript } from "@/shared/theme/theme-init-script";
-import MainHeader from "@/widgets/MainHeader";
+import { themeInitScript } from "@/themes/theme-init-script";
 import MainFooter from "@/widgets/MainFooter";
+import MainHeader from "@/widgets/MainHeader";
 
-import "../shared/theme/globals.css";
+import "../themes/globals.css";
 import { AppProviders } from "@/widgets/AppProviders";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });

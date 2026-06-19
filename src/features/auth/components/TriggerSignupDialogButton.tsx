@@ -1,6 +1,6 @@
 "use client";
 import type React from "react";
-import { Button } from "@/shared/ui/base/button";
+import { Button } from "@/components/base/button";
 import { useAppStore } from "@/stores/app-store/AppStoreProvider";
 import {
 	selectActiveModal,

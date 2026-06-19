@@ -12,7 +12,7 @@ const eslintConfig = defineConfig([
 				{ type: "app", pattern: ["src/app/**"], pathNot: ["src/app/_components/**"] },
 				{
 					// composed UI blocks
-					type: "components",
+					type: "block-ui",
 					pattern: ["src/widgets/**"],
 				},
 				{
@@ -28,7 +28,10 @@ const eslintConfig = defineConfig([
 					pattern: "src/infrastructure/repositories/(*)/**",
 					capture: ["repoName"],
 				},
-				{ type: "shared", pattern: ["src/shared/**", "src/lib/**"] },
+				{
+					type: "shared",
+					pattern: ["src/lib/**", "src/utils/**", "src/components/**"],
+				},
 				{ type: "stores", pattern: ["src/stores/**"] },
 			],
 			"boundaries/ignore": ["**/*.test.*", "**/*.spec.*"],
@@ -42,17 +45,18 @@ const eslintConfig = defineConfig([
 						{
 							from: "app",
 							allow: [
-								"components",
+								"block-ui",
 								"feature",
 								"entities",
 								"infra-api",
 								"infra-services",
 								"infra-repository",
 								"shared",
+								"stores",
 							],
 						},
 						{
-							from: "components",
+							from: "block-ui",
 							allow: [
 								"feature",
 								"entities",
@@ -61,7 +65,7 @@ const eslintConfig = defineConfig([
 								"infra-services",
 								"infra-repository",
 								"shared",
-								"stores"
+								"stores",
 							],
 						},
 						{
@@ -71,6 +75,7 @@ const eslintConfig = defineConfig([
 								"entities",
 								"infrastructure",
 								"shared",
+								"stores",
 								"infra-api",
 								"infra-services",
 								"infra-repository",
@@ -93,17 +98,14 @@ const eslintConfig = defineConfig([
 							], // same-slice only
 						},
 						{ from: "infra-api", allow: ["shared"] },
-
 						{ from: "infra-services", allow: ["shared"] },
 						{
 							from: "shared",
-							allow: ['shared'],
+							allow: ["shared"],
 						},
 						{
 							from: "stores",
-							allow: [
-								"feature",
-							],
+							allow: ["feature"],
 						},
 					],
 				},

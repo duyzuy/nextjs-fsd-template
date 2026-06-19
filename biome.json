@@ -23,7 +23,8 @@
 				"noUnknownAtRules": "off"
 			},
 			"a11y": {
-				"useButtonType": "error"
+				"useButtonType": "error",
+				"useValidAnchor": "off"
 			},
 			"style": {
 				"useImportType": "error"

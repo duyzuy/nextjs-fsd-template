@@ -1,13 +1,12 @@
 "use client";
 import type React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/shared/ui/base/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/base/dialog";
 import { useAppStore } from "@/stores/app-store/AppStoreProvider";
 import {
 	selectActiveModal,
 	selectAuthOnCloseModal,
 	selectAuthOnShowModal,
 } from "../store/auth.selectors";
-import SigninForm from "./SigninForm";
 
 type SignupDialogProps = {
 	className?: string;
@@ -32,7 +31,7 @@ const SignupDialog: React.FC<SignupDialogProps> = () => {
 				<DialogHeader>
 					<DialogTitle>Signup</DialogTitle>
 				</DialogHeader>
-				<SigninForm />
+				<>asdf</>
 				<div>
 					<p className="text-center">
 						{`${"if you already have account?"}`}{" "}

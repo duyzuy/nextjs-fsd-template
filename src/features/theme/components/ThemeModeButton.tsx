@@ -1,12 +1,12 @@
 "use client";
 import type React from "react";
-import { Button } from "@/shared/ui/base/button";
+import { Button } from "@/components/base/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@/shared/ui/base/dropdown-menu";
+} from "@/components/base/dropdown-menu";
 import useTheme from "../hooks/useTheme";
 import type { ThemeSliceState } from "../store/theme.slice";
 

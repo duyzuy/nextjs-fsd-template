@@ -2,6 +2,7 @@
 import { SearchIcon, User } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
+import { Button } from "@/components/base/button";
 import Authorized from "@/features/auth/components/Authorized";
 import TriggerSigninDialogButton from "@/features/auth/components/TriggerSigninDialogButton";
 import TriggerSignupDialogButton from "@/features/auth/components/TriggerSignupDialogButton";
@@ -9,7 +10,6 @@ import UnAuthorized from "@/features/auth/components/UnAuthorized";
 import UserInformationDropdown from "@/features/profile/components/UserInformationDropdown";
 import ThemeModeButton from "@/features/theme/components/ThemeModeButton";
 import { cn } from "@/lib/utils";
-import { Button } from "@/shared/ui/base/button";
 
 export interface MainHeaderProps {
 	className?: string;

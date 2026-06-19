@@ -1,7 +1,7 @@
 import { getProfile } from "@/features/profile/server";
 import ThemeController from "@/features/theme/controllers/ThemeController";
 import { getAccessToken, getRefreshToken } from "@/lib/cookie";
-import QueryClientProvider from "@/shared/providers/QueryClientProvider";
+import QueryClientProvider from "@/providers/QueryClientProvider";
 import { AppStoreProvider } from "@/stores/app-store/AppStoreProvider";
 
 export async function AppProviders({ children }: React.PropsWithChildren) {

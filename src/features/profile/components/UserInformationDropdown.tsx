@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/shared/ui/base/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/base/avatar";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -9,7 +9,7 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@/shared/ui/base/dropdown-menu";
+} from "@/components/base/dropdown-menu";
 import { useGetUserInformationStore } from "../hooks/useGetProfileStore";
 
 function UserInformationDropdown() {

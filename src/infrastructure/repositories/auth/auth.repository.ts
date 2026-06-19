@@ -1,3 +1,4 @@
+import { ENDPOINTS } from "@/constants/endpoints";
 import type { SignupPayload, TProfile } from "@/entities/auth/model/auth.type";
 import type { IAuthRepository } from "@/entities/auth/repository/auth.repository.interface";
 import { client, type RequestOptions } from "@/infrastructure/api";
@@ -6,7 +7,6 @@ import {
 	toSigninDomain,
 	toSignUpDomain,
 } from "@/infrastructure/repositories/auth/auth.mapper";
-import { ENDPOINTS } from "@/shared/constants/endpoints";
 import type { GetProfileDto, SignInDto, SignUpDto } from "./auth.dto";
 
 export class AuthRepository implements IAuthRepository {

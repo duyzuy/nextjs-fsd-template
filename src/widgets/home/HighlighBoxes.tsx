@@ -1,5 +1,5 @@
 import React from "react";
-import { PointerIcon, TagIcon, UserPackageIcon } from "@/shared/icons";
+import { PointerIcon, TagIcon, UserPackageIcon } from "@/components/icons";
 
 export interface HightLightBoxProps {
 	className?: string;
