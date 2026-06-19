@@ -1,0 +1,59 @@
+import { notFound } from "next/navigation";
+import { Suspense, ViewTransition } from "react";
+import { CollectionGrid } from "@/features/galleries/components/collection-grid";
+
+const COLLECTION_SLUGS = ["mia-kern", "kenji-mori", "leila-osei", "sam-rivera"];
+
+export async function generateStaticParams() {
+	return COLLECTION_SLUGS.map((slug) => ({ slug }));
+}
+
+export default async function CollectionPage({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params;
+	if (!COLLECTION_SLUGS.includes(slug)) notFound();
+
+	return (
+		<ViewTransition
+			enter={{
+				"nav-forward": "nav-forward",
+				"nav-back": "nav-back",
+				default: "none",
+			}}
+			exit={{
+				"nav-forward": "nav-forward",
+				"nav-back": "nav-back",
+				default: "none",
+			}}
+			default="none"
+		>
+			<Suspense fallback={<CollectionGridSkeleton />}>
+				<ViewTransition
+					key={slug}
+					name="collection-content"
+					share="auto"
+					enter="auto"
+					default="none"
+				>
+					<CollectionGrid slug={slug} />
+				</ViewTransition>
+			</Suspense>
+		</ViewTransition>
+	);
+}
+
+function CollectionGridSkeleton() {
+	return (
+		<div className="animate-pulse">
+			<div className="h-4 w-20 bg-white/5 rounded -mt-6 mb-6" />
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+				{Array.from({ length: 3 }).map((_, i) => (
+					<div
+						key={i.toString()}
+						className="bg-white/5 rounded-lg"
+						style={{ aspectRatio: "4/3" }}
+					/>
+				))}
+			</div>
+		</div>
+	);
+}

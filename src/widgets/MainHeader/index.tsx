@@ -18,8 +18,8 @@ export interface MainHeaderProps {
 const MainHeader: React.FC<MainHeaderProps> = () => {
 	const MENUS = [
 		{ title: "About", href: "/about" },
-		{ title: "Destination", href: "/destination" },
 		{ title: "Gallery", href: "/gallery" },
+		{ title: "Collection", href: "/collection/mia-kern" },
 		{ title: "Service", href: "/service" },
 		{ title: "Contact", href: "/contact" },
 	];

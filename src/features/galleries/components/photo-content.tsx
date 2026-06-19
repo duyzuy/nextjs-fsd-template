@@ -8,12 +8,6 @@ import PhotoNavigationArrow from "./photo-navigation-narrow";
 export async function PhotoContent({ id }: { id: string }) {
 	const [photo, allPhotos] = await Promise.all([getPhoto(id), getPhotos()]);
 
-	// await new Promise((rs, rj) => {
-	// 	setTimeout(() => {
-	// 		rs("ok");
-	// 	}, 3000);
-	// });
-
 	const currentIndex = allPhotos.findIndex((p) => p.id === id);
 	const prevPhoto = currentIndex > 0 ? allPhotos[currentIndex - 1] : null;
 	const nextPhoto = currentIndex < allPhotos.length - 1 ? allPhotos[currentIndex + 1] : null;

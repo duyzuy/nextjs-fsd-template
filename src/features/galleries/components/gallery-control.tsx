@@ -2,7 +2,6 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useOptimistic, useState, useTransition } from "react";
-import { Button } from "@/components/base/button";
 import type { SortKey } from "../data/photo";
 
 const SORT_OPTIONS: { key: SortKey; label: string }[] = [
@@ -17,7 +16,7 @@ export function GalleryControlsSkeleton() {
 			className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-8 animate-pulse"
 			style={{ viewTransitionName: "gallery-controls" }}
 		>
-			<div className="w-full sm:w-64 h-[30px] rounded border border-white/10 bg-white/5" />
+			<div className="w-full sm:w-64 h-7.5 rounded border border-white/10 bg-white/5" />
 			<div className="flex items-center gap-1">
 				<span className="font-mono text-xs text-white/30 mr-1">Sort:</span>
 				{["Title", "Year", "Photographer"].map((label) => (
@@ -90,7 +89,8 @@ export function GalleryControls() {
 			<div className="flex items-center gap-1">
 				<span className="font-mono text-xs text-white/30 mr-1">Sort:</span>
 				{SORT_OPTIONS.map((opt) => (
-					<Button
+					<button
+						type="button"
 						key={opt.key}
 						onClick={() => handleSort(opt.key)}
 						className={`px-2.5 py-1 rounded font-mono text-xs transition-colors ${
@@ -100,7 +100,7 @@ export function GalleryControls() {
 						}`}
 					>
 						{opt.label}
-					</Button>
+					</button>
 				))}
 			</div>
 		</div>
