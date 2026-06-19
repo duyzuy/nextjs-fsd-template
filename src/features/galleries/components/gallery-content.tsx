@@ -29,7 +29,11 @@ export function GalleryContentSkeleton() {
 		<div className="animate-pulse">
 			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 				{Array.from({ length: 6 }).map((_, i) => (
-					<div key={i} className="bg-white/5 rounded-lg" style={{ aspectRatio: "4/3" }} />
+					<div
+						key={i.toString()}
+						className="bg-white/5 rounded-lg"
+						style={{ aspectRatio: "4/3" }}
+					/>
 				))}
 			</div>
 		</div>

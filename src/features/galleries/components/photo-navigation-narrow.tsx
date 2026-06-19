@@ -31,6 +31,7 @@ export default function PhotoNavigationArrow({ photo, mode }: Props) {
 		}
 	});
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: photo is intentionally omitted
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyDownEffect);
 
