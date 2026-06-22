@@ -1,14 +1,14 @@
-import type { TProfile, TSignIn, TSignUp } from "@/entities/auth/model/auth.model";
+import type { AuthSignedIn, AuthSignedUp, TProfile } from "@/entities/auth/model/auth.model";
 import type { GetProfileDto, SignInDto, SignUpDto } from "./auth.dto";
 
-export const toSigninDomain = (dto: SignInDto): TSignIn => {
+export const toSigninDomain = (dto: SignInDto): AuthSignedIn => {
 	return {
 		accessToken: dto.accessToken,
 		refreshToken: dto.refreshToken,
 	};
 };
 
-export const toSignUpDomain = (dto: SignUpDto): TSignUp => {
+export const toSignUpDomain = (dto: SignUpDto): AuthSignedUp => {
 	return {
 		id: dto.id,
 		name: dto.name,
