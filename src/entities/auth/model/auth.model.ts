@@ -1,7 +1,7 @@
 export type SigninPayload = { email: string; password: string };
 export type SignupPayload = { email: string; password: string };
 
-export type TSignIn = { accessToken: string; refreshToken: string };
+export type AuthSignedIn = { accessToken: string; refreshToken: string };
 
 export type TProfile = {
 	id: string;
@@ -14,7 +14,7 @@ export type TProfile = {
 	} | null;
 };
 
-export type TSignUp = {
+export type AuthSignedUp = {
 	id: string;
 	name: string;
 	username: string;

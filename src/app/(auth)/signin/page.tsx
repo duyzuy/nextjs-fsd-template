@@ -1,5 +1,3 @@
-"use client";
-
 import { GalleryVerticalEndIcon } from "lucide-react";
 import SigninForm from "@/features/auth/components/SigninForm";
 

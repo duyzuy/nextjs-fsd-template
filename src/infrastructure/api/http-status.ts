@@ -1,58 +1,90 @@
-import { NextResponse } from "next/server";
-import type { DomainError } from "./errors/domain-error";
-export type SuccessResponse<T> = {
-	success: true;
-	data: T;
-};
+// import { NextResponse } from "next/server";
+// import type { DomainError } from "./errors/domain-error";
+// export type SuccessResponse<T> = {
+// 	success: true;
+// 	data: T;
+// };
 
-export type ErrorResponse<E> = {
-	success: false;
-	error: E;
-	data: null;
-};
+// export type ErrorResponse<E> = {
+// 	success: false;
+// 	error: E;
+// };
 
-export type ApiError<M = unknown> = {
-	message: string;
-	code?: string;
-	status?: number;
-	meta?: M;
-};
+// export type ApiError<M = unknown> = {
+// 	message: string;
+// 	code?: string;
+// 	status?: number;
+// 	meta?: M;
+// };
 
-export type HttpResponse<TSuccess, TError = ApiError> =
-	| SuccessResponse<TSuccess>
-	| ErrorResponse<TError>;
+// export const HttpStatus = {
+// 	// 2xx Success
+// 	OK: 200,
+// 	CREATED: 201,
+// 	ACCEPTED: 202,
+// 	NO_CONTENT: 204,
 
-const ok = <T>(data: T) =>
-	NextResponse.json<SuccessResponse<T>>({ success: true, data }, { status: 200 });
+// 	// 3xx Redirection
+// 	MOVED_PERMANENTLY: 301,
+// 	FOUND: 302,
+// 	NOT_MODIFIED: 304,
 
-const created = <T>(data: T) =>
-	NextResponse.json<SuccessResponse<T>>({ success: true, data }, { status: 201 });
+// 	// 4xx Client Errors
+// 	BAD_REQUEST: 400,
+// 	UNAUTHORIZED: 401,
+// 	PAYMENT_REQUIRED: 402,
+// 	FORBIDDEN: 403,
+// 	NOT_FOUND: 404,
+// 	METHOD_NOT_ALLOWED: 405,
+// 	CONFLICT: 409,
+// 	GONE: 410,
+// 	UNPROCESSABLE_ENTITY: 422,
+// 	TOO_MANY_REQUESTS: 429,
 
-const fail = <M = unknown>(status: number, message: string, code = "INTERNAL_ERROR", meta?: M) =>
-	NextResponse.json<ErrorResponse<ApiError<M>>>(
-		{ success: false, error: { message, code, meta, status }, data: null },
-		{ status },
-	);
+// 	// 5xx Server Errors
+// 	INTERNAL_SERVER_ERROR: 500,
+// 	NOT_IMPLEMENTED: 501,
+// 	BAD_GATEWAY: 502,
+// 	SERVICE_UNAVAILABLE: 503,
+// 	GATEWAY_TIMEOUT: 504,
+// } as const;
 
-const fromDomainError = (error: DomainError) =>
-	fail(error.status, error.message, error.code, error.meta);
+// export type HttpResponse<TSuccess, TError> = SuccessResponse<TSuccess> | ErrorResponse<TError>;
 
-export const http = {
-	ok,
-	created,
-	fromDomainError,
-	fail,
-	badRequest: (message = "Bad request", code = "BAD_REQUEST", errors?: unknown) =>
-		fail(400, message, code, errors),
+// const ok = <T>(data: T) =>
+// 	NextResponse.json<SuccessResponse<T>>({ success: true, data }, { status: HttpStatus.OK });
 
-	unauthorized: (message = "Unauthorized", code = "UNAUTHORIZED") => fail(401, message, code),
+// const created = <T>(data: T) =>
+// 	NextResponse.json<SuccessResponse<T>>({ success: true, data }, { status: HttpStatus.CREATED });
 
-	forbidden: (message = "Forbidden", code = "FORBIDDEN") => fail(403, message, code),
+// const fail = <M = unknown>(status: number, message: string, code = "INTERNAL_ERROR", meta?: M) =>
+// 	NextResponse.json<ErrorResponse<ApiError<M>>>(
+// 		{ success: false, error: { message, code, meta, status } },
+// 		{ status },
+// 	);
 
-	notFound: (message = "Not found", code = "NOT_FOUND") => fail(404, message, code),
+// const fromDomainError = (error: DomainError) =>
+// 	fail(error.status, error.message, error.code, error.meta);
 
-	conflict: (message = "Conflict", code = "CONFLICT") => fail(409, message, code),
+// export const http = {
+// 	ok,
+// 	created,
+// 	fromDomainError,
+// 	fail,
+// 	badRequest: (message = "Bad request", code = "BAD_REQUEST", errors?: unknown) =>
+// 		fail(HttpStatus.BAD_REQUEST, message, code, errors),
 
-	serverError: (message = "Internal server error", code = "INTERNAL_ERROR") =>
-		fail(500, message, code),
-};
+// 	unauthorized: (message = "Unauthorized", code = "UNAUTHORIZED") =>
+// 		fail(HttpStatus.UNAUTHORIZED, message, code),
+
+// 	forbidden: (message = "Forbidden", code = "FORBIDDEN") =>
+// 		fail(HttpStatus.FORBIDDEN, message, code),
+
+// 	notFound: (message = "Not found", code = "NOT_FOUND") =>
+// 		fail(HttpStatus.NOT_FOUND, message, code),
+
+// 	conflict: (message = "Conflict", code = "CONFLICT") => fail(HttpStatus.CONFLICT, message, code),
+
+// 	serverError: (message = "Internal server error", code = "INTERNAL_ERROR") =>
+// 		fail(HttpStatus.INTERNAL_SERVER_ERROR, message, code),
+// };

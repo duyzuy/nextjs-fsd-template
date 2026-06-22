@@ -1,6 +1,5 @@
 import qs from "qs";
 import { HttpError } from "./errors/http-error";
-import { http } from "./http-status";
 
 export interface RequestOptions extends RequestInit {
 	params?: Record<string, string | number | undefined>;
@@ -8,22 +7,22 @@ export interface RequestOptions extends RequestInit {
 	_retry?: boolean; // internal — prevents infinite retry loops
 }
 
-const buildObjectToQueryString = (params?: Record<string, any>, prefix?: string) => {
-	return params ? `${qs.stringify(params)}` : "";
-};
-
 const buildUrl = (url: string, ver = "v1") => {
-	return url.startsWith("http")
-		? url
-		: url.startsWith("/")
-			? `${process.env.NEXT_PUBLIC_API_URL}/api/${ver}${url}`
-			: `${process.env.NEXT_PUBLIC_API_URL}/api/${ver}/${url}`;
+	if (!process.env.NEXT_PUBLIC_API_URL) {
+		throw new Error("NEXT_PUBLIC_API_URL is missing");
+	}
+
+	if (url.startsWith("http")) return url;
+
+	const baseUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/${ver}`;
+
+	return url.startsWith("/") ? `${baseUrl}${url}` : `${baseUrl}/${url}`;
 };
 
 const buildBody = (body?: unknown): RequestInit["body"] | undefined => {
 	if (body === undefined) return undefined;
 	if (body instanceof FormData) return body;
-	if (typeof body === "string") return body;
+
 	return JSON.stringify(body);
 };
 
@@ -35,7 +34,7 @@ const request = async <T>(url: string, requestOptions: RequestOptions = {}): Pro
 	const isFormData = requestOptions.body instanceof FormData;
 
 	if (method === "GET" && params) {
-		baseUrl = baseUrl.concat("?", buildObjectToQueryString(params));
+		baseUrl = baseUrl.concat("?", qs.stringify(params));
 	}
 
 	try {
@@ -48,8 +47,8 @@ const request = async <T>(url: string, requestOptions: RequestOptions = {}): Pro
 				...headers,
 			},
 		});
-
-		const data = await response.json();
+		const contentType = response.headers.get("content-type");
+		const data = contentType?.includes("application/json") ? await response.json() : null;
 
 		if (!response.ok) {
 			throw new HttpError(
@@ -65,7 +64,7 @@ const request = async <T>(url: string, requestOptions: RequestOptions = {}): Pro
 		if (error instanceof HttpError) {
 			throw error;
 		}
-		throw http.serverError("Network error");
+		throw new HttpError(500, "INTERNAL_SERVER_ERROR", "Unexpected error", error);
 	}
 };
 

@@ -1,6 +1,6 @@
 import { ENDPOINTS } from "@/constants/endpoints";
-import type { SignupPayload, TProfile } from "@/entities/auth/model/auth.type";
-import type { IAuthRepository } from "@/entities/auth/repository/auth.repository.interface";
+import type { SignupPayload, TProfile } from "@/entities/auth/model/auth.model";
+import type { IAuthRepository } from "@/entities/auth/model/auth.repo";
 import { client, type RequestOptions } from "@/infrastructure/api";
 import {
 	toProfileDomain,

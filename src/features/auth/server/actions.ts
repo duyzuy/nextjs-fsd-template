@@ -1,9 +1,13 @@
+import { HttpError } from "@/infrastructure/api/errors/http-error";
 import { authRepository } from "@/infrastructure/repositories/auth/auth.repository";
 
 export async function getMe(token: string) {
 	try {
-		return authRepository.me({ headers: { Authorization: `Bearer ${token}` } });
+		const data = authRepository.me({ accessToken: token });
+		return { success: true, data: data };
 	} catch (err) {
-		console.log(err);
+		if (err instanceof HttpError) {
+			return { success: false, error: err.message };
+		}
 	}
 }

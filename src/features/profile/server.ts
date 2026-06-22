@@ -6,5 +6,6 @@ export const getProfile = cache(async (token: string) => {
 		return authRepository.me({ accessToken: token });
 	} catch (err) {
 		console.log(err);
+		return null;
 	}
 });

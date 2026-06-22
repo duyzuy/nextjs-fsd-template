@@ -14,7 +14,6 @@ import SigninForm from "./SigninForm";
 type SigninDialogProps = {};
 
 const SigninDialog: React.FC<SigninDialogProps> = () => {
-	const router = useRouter();
 	const activeModal = useAppStore(selectActiveModal);
 	const openDialog = useAppStore(selectAuthOnShowModal);
 	const closeDialog = useAppStore(selectAuthOnCloseModal);
@@ -28,22 +27,10 @@ const SigninDialog: React.FC<SigninDialogProps> = () => {
 	};
 	const isShowModal = activeModal === "signin";
 
-	const { onSignIn, error, isLoading } = useSignin({
-		onSuccess() {
-			router.refresh();
-			closeDialog();
-		},
-	});
-
 	return (
 		<Dialog defaultOpen={isShowModal} open={isShowModal} onOpenChange={handleOpenChange}>
-			<DialogContent>
-				<SigninForm
-					onSubmit={onSignIn}
-					error={error}
-					isLoading={isLoading}
-					onClickSignup={handleOpenSignupDialog}
-				/>
+			<DialogContent className="p-6">
+				<SigninForm onClickSignup={handleOpenSignupDialog} />
 			</DialogContent>
 		</Dialog>
 	);
