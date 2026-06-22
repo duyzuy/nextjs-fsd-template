@@ -21,7 +21,7 @@ export const createAppStore = (init?: AppStoreInit) => {
 			get,
 			api,
 		),
-		...createThemeSlice()(set, get, api),
+		...createThemeSlice(set, get, api),
 		...createUserInformationSlice({ information: init?.userInfo })(set, get, api),
 	}));
 };

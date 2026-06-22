@@ -1,5 +1,6 @@
-import type { StateCreator } from "zustand";
+import { createSlice } from "@/stores/base-slice";
 
+const NAME_SPACE = "theme" as const;
 type ThemeMode = "dark" | "light" | "system";
 
 export type ThemeSliceState = {
@@ -9,26 +10,23 @@ export type ThemeSliceAction = {
 	setThemeMode: (theme: ThemeMode) => void;
 };
 
-export type ThemeSlice = { theme: ThemeSliceState & ThemeSliceAction };
+export type ThemeSlice = { [NAME_SPACE]: ThemeSliceState & ThemeSliceAction };
 
 const defaultState: ThemeSliceState = {
 	themeMode: "system",
 };
 
-export const createThemeSlice: (init?: ThemeSliceState) => StateCreator<ThemeSlice> =
-	(init) => (set, get, api) => ({
-		theme: {
-			...defaultState,
-			...init,
-			setThemeMode: (theme: ThemeMode) => {
-				set((state) => ({
-					...state,
-					theme: {
-						...state.theme,
-						themeMode: theme,
-					},
-				}));
-			},
-			...init,
+export const createThemeSlice = createSlice<"theme", ThemeSlice["theme"]>({
+	namespace: NAME_SPACE,
+	slice: (set, get, api) => ({
+		...defaultState,
+		setThemeMode: (theme: ThemeMode) => {
+			set((state) => ({
+				theme: {
+					...state.theme,
+					themeMode: theme,
+				},
+			}));
 		},
-	});
+	}),
+});

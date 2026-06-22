@@ -1,5 +1,4 @@
-import type { StateCreator } from "zustand";
-
+import type { SliceCreator } from "@/stores/base-slice";
 export type UserInformationSliceState = {
 	information?: {
 		id: string;
@@ -15,19 +14,18 @@ export type UserInformationSliceAction = {
 export type UserInformationSlice = {
 	userInformation: UserInformationSliceState & UserInformationSliceAction;
 };
-export const createUserInformationSlice: (
-	init?: UserInformationSliceState,
-) => StateCreator<UserInformationSlice> = (init) => (set, get, api) => ({
-	userInformation: {
-		...init,
-		setInformation: (userInfo) => {
-			set((state) => ({
-				...state,
-				userInformation: {
-					...state.userInformation,
-					information: userInfo,
-				},
-			}));
+export const createUserInformationSlice =
+	(init: UserInformationSliceState): SliceCreator<UserInformationSlice> =>
+	(set, get, api) => ({
+		userInformation: {
+			...init,
+			setInformation: (userInfo) => {
+				set((state) => ({
+					userInformation: {
+						...state.userInformation,
+						information: userInfo,
+					},
+				}));
+			},
 		},
-	},
-});
+	});
